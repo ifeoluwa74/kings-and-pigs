@@ -155,16 +155,23 @@ class Player extends AnimatedGameObject{
                 this.position.x += depth.x;
             }
 
-            if (this._previousYPosition <= tileBounds.top && blocks.type === TileType['normal']) {
-                // move character in the y direction
+            // if (this._previousYPosition <= tileBounds.top && blocks.type === TileType['normal']) {
+            //     // move character in the y direction
+            //     this.onTheGround = true;
+            //     this.velocity.y = 0;
+            // }
+
+            if((this.boundingBox.top <= tileBounds.top || this.boundingBox.bottom >= tileBounds.bottom) && TileType['normal']){
                 this.onTheGround = true;
                 this.velocity.y = 0;
             }
 
+            
+
             if(blocks.type === TileType['background'] || this.onTheGround){
                 this.position.y += depth.y + 1;
             }
+            this._previousYPosition = this.position.y;
         }
-        this._previousYPosition = this.position.y;
     }
 }
